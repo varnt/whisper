@@ -122,8 +122,8 @@ if __name__ == "__main__":
     if os.path.exists(input_folder):
         ##convert_folder_to_mp3(input_folder, output_folder)
         print("Conversion completed.")
-        print("StartTranscribing_Base")
-        convert_folder_to_transcript(output_folder,transcribe_folder)
+        ##print("StartTranscribing_Base")
+        ##convert_folder_to_transcript(output_folder,transcribe_folder)
         print("StartTranscribing_Medium")
         convert_folder_to_transcript_medium(output_folder,transcribe_folder)
         print("StartTranscribing_Large")
