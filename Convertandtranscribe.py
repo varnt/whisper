@@ -71,19 +71,23 @@ def convert_folder_to_transcript_medium(input_folder, output_folder):
                 input_file_path = os.path.join(root, file)
                 output_file_path = os.path.join(output_folder, os.path.relpath(input_file_path, input_folder))
                 output_file_path = os.path.splitext(output_file_path)[0] +"_MEDIUM_"+ ".txt"  # Change extension to .txt
-                model = whisper.load_model("medium")
-                result = model.transcribe(input_file_path)
-                file_path = output_file_path
-                print(result["text"])
+                if os.path.exists(output_file_path):
+                    print(f"File {output_file_path} already exists.")
+                    continue
+                else:
+                    model = whisper.load_model("medium")
+                    result = model.transcribe(input_file_path)
+                    file_path = output_file_path
+                    print(result["text"])
+        
     
-
-                # Write the text content to the file
-                with open(file_path, "w") as file:
-                    file.write(json.dumps(result))
-
-                # Read the content of the file to verify
-                with open(file_path, "r") as file:
-                    saved_content = file.read() 
+                    # Write the text content to the file
+                    with open(file_path, "w") as file:
+                        file.write(json.dumps(result))
+    
+                    # Read the content of the file to verify
+                    with open(file_path, "r") as file:
+                        saved_content = file.read() 
 
 def convert_folder_to_transcript_LARGE(input_folder, output_folder):
     # Create output directory if it doesn't exist
@@ -98,19 +102,24 @@ def convert_folder_to_transcript_LARGE(input_folder, output_folder):
                 input_file_path = os.path.join(root, file)
                 output_file_path = os.path.join(output_folder, os.path.relpath(input_file_path, input_folder))
                 output_file_path = os.path.splitext(output_file_path)[0] +"_large_"+ ".txt"  # Change extension to .txt
-                model = whisper.load_model("large")
-                result = model.transcribe(input_file_path)
-                file_path = output_file_path
-                print(result["text"])
+                # Check if output_file_path already exists
+                if os.path.exists(output_file_path):
+                    print(f"File {output_file_path} already exists.")
+                    continue
+                else:
+                    model = whisper.load_model("large")
+                    result = model.transcribe(input_file_path)
+                    file_path = output_file_path
+                    print(result["text"])
     
 
-                # Write the text content to the file
-                with open(file_path, "w") as file:
-                    file.write(json.dumps(result))
-
-                # Read the content of the file to verify
-                with open(file_path, "r") as file:
-                    saved_content = file.read() 
+                    # Write the text content to the file
+                    with open(file_path, "w") as file:
+                        file.write(json.dumps(result))
+    
+                    # Read the content of the file to verify
+                    with open(file_path, "r") as file:
+                        saved_content = file.read() 
 
 
 
